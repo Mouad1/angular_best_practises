@@ -3,8 +3,17 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'angular_lifecycles';
+  showChild = true;
+  childProperty = 'Initial Value';
+
+  toggleChild() {
+    this.showChild = !this.showChild;
+  }
+
+  changeChildProperty() {
+    this.childProperty = 'Updated Value';
+  }
 }

@@ -1,0 +1,10 @@
+<div>
+  <h3>{{ item.name }}</h3>
+  <p>Price: {{ item.price | currency }}</p>
+  <input
+    type="number"
+    [(ngModel)]="item.quantity"
+    (ngModelChange)="onQuantityChange($event)"
+  />
+  <p>Total: {{ item.price * item.quantity | currency }}</p>
+</div>

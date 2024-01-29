@@ -1,0 +1,7 @@
+<div *ngIf="loading">Loading...</div>
+<div *ngFor="let item of items; let i = index">
+  <app-item [item]="item" (quantityChange)="onQuantityChange()"></app-item>
+  <button (click)="removeItem(i)">Remove Item</button>
+</div>
+<button (click)="addItem()">Add Item</button>
+<h2>Total Price: {{ totalPrice | currency }}</h2>
