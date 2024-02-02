@@ -30,14 +30,11 @@ export class ProductComponent implements OnInit {
   applyDiscount(discount: number) {
     const newPrice = this.basePrice - (this.basePrice * discount) / 100;
     const priceDifference = this.currentPrice - newPrice;
-    // Check if there's an actual change in the price
-    if (newPrice !== this.currentPrice) {
-      this.currentPrice = newPrice;
-      // Update local price and notify others of the price change
-      this.priceService.emitPriceChange<number>(
-        'priceDifference',
-        priceDifference
-      );
-    }
+    this.currentPrice = newPrice;
+    // Update local price and notify others of the price change
+    this.priceService.emitPriceChange<number>(
+      'priceDifference',
+      priceDifference
+    );
   }
 }

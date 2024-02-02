@@ -1,7 +1,2 @@
-<!-- <div>Product Price: {{ price }}</div> -->
-
-<!-- <div>Product {{ productId }} Price: {{ basePrice }}</div>
-<app-discount (discountApplied)="applyDiscount($event)"></app-discount> -->
-
 <div>Product {{ productId }} Price: {{ currentPrice | currency }}</div>
 <app-discount [productId]="productId"></app-discount>
