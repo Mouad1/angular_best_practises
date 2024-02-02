@@ -1,7 +1,12 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 
-@Injectable() // Notice that providedIn is not set here
+/**
+ * This is an Event-based Service, it is highly flexible, scalable, and suitable for complex applications with dynamic event requirements. It allows components to remain loosely coupled.
+ */
+@Injectable({
+  providedIn: 'root',
+}) // Dont set ProvidedIn here if your service will be used only in the parent component and its children
 export class PriceCalculationService implements OnDestroy {
   private eventChannels: { [eventName: string]: Subject<any> } = {};
   private subscriptions$: Subscription[] = [];

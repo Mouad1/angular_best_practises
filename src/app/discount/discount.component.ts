@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PriceCalculationService } from '../price-calculation.service';
 
 @Component({
@@ -8,12 +8,13 @@ import { PriceCalculationService } from '../price-calculation.service';
 })
 export class DiscountComponent {
   constructor(private priceService: PriceCalculationService) {}
+  @Input() productId!: number;
   discountPercentage: number = 0; // Default discount percentage
 
   applyDiscount() {
-    this.priceService.emitPriceChange<number>(
-      'discount',
-      this.discountPercentage
+    this.priceService.emitPriceChange<{ productId: number; discount: number }>(
+      'discountApplied',
+      { productId: this.productId, discount: this.discountPercentage }
     );
   }
 }

@@ -9,23 +9,35 @@ import { PriceCalculationService } from '../price-calculation.service';
 export class ProductComponent implements OnInit {
   @Input() productId!: number;
   @Input() basePrice!: number;
-
-  productName!: string;
-  price!: number;
+  currentPrice!: number;
 
   constructor(private priceService: PriceCalculationService) {}
 
   ngOnInit() {
-    this.productName = `Product ${this.productId}`;
-    this.price = this.basePrice;
+    // Initialize currentPrice with basePrice
+    this.currentPrice = this.basePrice;
 
-    this.priceService.onPriceChange<number>('discount', (discountValue) => {
-      this.applyDiscount(discountValue);
-    });
+    this.priceService.onPriceChange<{ productId: number; discount: number }>(
+      'discountApplied',
+      (data) => {
+        if (data.productId === this.productId) {
+          this.applyDiscount(data.discount);
+        }
+      }
+    );
   }
 
-  applyDiscount(discountValue: number) {
-    this.price -= (this.price * discountValue) / 100; // Subtract discount from the current price
-    this.price = Math.max(this.price, 0); // Ensure the price doesn't go below 0
+  applyDiscount(discount: number) {
+    const newPrice = this.basePrice - (this.basePrice * discount) / 100;
+    const priceDifference = this.currentPrice - newPrice;
+    // Check if there's an actual change in the price
+    if (newPrice !== this.currentPrice) {
+      this.currentPrice = newPrice;
+      // Update local price and notify others of the price change
+      this.priceService.emitPriceChange<number>(
+        'priceDifference',
+        priceDifference
+      );
+    }
   }
 }

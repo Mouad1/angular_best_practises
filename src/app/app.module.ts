@@ -7,6 +7,7 @@ import { DiscountComponent } from './discount/discount.component';
 import { XchangeRateComponent } from './xchange-rate/xchange-rate.component';
 import { ListOfProductsComponent } from './list-of-products/list-of-products.component';
 import { FormsModule } from '@angular/forms';
+import { CartSummaryComponent } from './cart-summary/cart-summary.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { FormsModule } from '@angular/forms';
     DiscountComponent,
     XchangeRateComponent,
     ListOfProductsComponent,
+    CartSummaryComponent,
   ],
   imports: [BrowserModule, FormsModule],
   providers: [],

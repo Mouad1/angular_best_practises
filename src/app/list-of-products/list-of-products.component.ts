@@ -11,7 +11,7 @@ interface Product {
   selector: 'app-list-of-products',
   templateUrl: './list-of-products.component.html',
   styleUrls: ['./list-of-products.component.scss'],
-  providers: [PriceCalculationService], // Service is provided here
+  // providers: [PriceCalculationService], // Service is provided here
 })
 export class ListOfProductsComponent {
   products: Product[] = [
